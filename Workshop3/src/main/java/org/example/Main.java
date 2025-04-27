@@ -1,19 +1,23 @@
 package org.example;
+
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args){
-    System.out.println("Loading csv file");
-    List<Product> products = FileLoader.readFile();
+    public static void main(String[] args) {
+        System.out.println("Loading csv file");
+        List<Product> products = FileLoader.readFile(); // Load product list
+        Scanner scanner = new Scanner(System.in);
+        ShoppingCart cart = new ShoppingCart();
 
-    ShoppingCart cart = new ShoppingCart();
-
-    Product foundProduct = searchProductBySKU(products, "AC100");
-    cart.addProductToCart(foundProduct);
+        Product foundProduct = findBySku(products, "AC100");
+        if (foundProduct != null) {
+            cart.addProductToCart(foundProduct);
+        }
 
         while (true) {
-            System.out.println("Welcome to the store! Choose an option:");
+            System.out.println("\nWelcome to the store! Choose an option:");
             System.out.println("1. View all products");
             System.out.println("2. Search by SKU");
             System.out.println("3. Search by price range");
@@ -28,12 +32,12 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    displayProducts(allProducts);
+                    displayProducts(products);
                     break;
                 case 2:
                     System.out.print("Enter SKU: ");
                     String skuSearch = scanner.nextLine();
-                    Product foundProduct = findBySku(allProducts, skuSearch);
+                    foundProduct = findBySku(products, skuSearch);
                     if (foundProduct != null) {
                         displayProducts(List.of(foundProduct));
                     } else {
@@ -45,21 +49,21 @@ public class Main {
                     double min = Double.parseDouble(scanner.nextLine());
                     System.out.print("Enter maximum price: ");
                     double max = Double.parseDouble(scanner.nextLine());
-                    List<Product> filteredByPrice = filterByPriceRange(allProducts, min, max);
+                    List<Product> filteredByPrice = filterByPriceRange(products, min, max);
                     displayProducts(filteredByPrice);
                     break;
                 case 4:
                     System.out.print("Enter product name: ");
                     String name = scanner.nextLine();
-                    List<Product> nameMatches = searchByName(allProducts, name);
+                    List<Product> nameMatches = searchByName(products, name);
                     displayProducts(nameMatches);
                     break;
                 case 5:
                     System.out.print("Enter SKU to add to cart: ");
                     String skuToAdd = scanner.nextLine();
-                    Product productToAdd = findBySku(allProducts, skuToAdd);
+                    Product productToAdd = findBySku(products, skuToAdd);
                     if (productToAdd != null) {
-                        cart.addToCart(productToAdd);
+                        cart.addProductToCart(productToAdd);
                         System.out.println("Added to cart.");
                     } else {
                         System.out.println("Product not found.");
@@ -68,15 +72,14 @@ public class Main {
                 case 6:
                     System.out.print("Enter SKU to remove from cart: ");
                     String skuToRemove = scanner.nextLine();
-                    cart.removeFromCart(skuToRemove);
-                    System.out.println("Removed from cart if it existed.");
+                    cart.removeProduct(skuToRemove);
                     break;
                 case 7:
-                    cart.viewCart();
+                    cart.displayItems();
                     break;
                 case 8:
-                    cart.viewCart();
-                    System.out.println("Total: $" + cart.getTotal());
+                    cart.displayItems();
+                    System.out.printf("Total: $%.2f%n", cart.getCartTotal());
                     System.out.println("Thank you for shopping!");
                     return;
                 case 9:
@@ -96,13 +99,13 @@ public class Main {
         }
         for (Product product : products) {
             System.out.printf("SKU: %s | Name: %s | Price: $%.2f | Dept: %s%n",
-                    product.getSku(), product.getName(), product.getPrice(), product.getDepartment());
+                    product.getSKU(), product.getProductName(), product.getPrice(), product.getDepartment());
         }
     }
 
     public static Product findBySku(List<Product> products, String sku) {
         for (Product product : products) {
-            if (product.getSku().equalsIgnoreCase(sku)) {
+            if (product.getSKU().equalsIgnoreCase(sku)) {
                 return product;
             }
         }
@@ -112,7 +115,7 @@ public class Main {
     public static List<Product> searchByName(List<Product> products, String name) {
         List<Product> matches = new ArrayList<>();
         for (Product product : products) {
-            if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+            if (product.getProductName().toLowerCase().contains(name.toLowerCase())) {
                 matches.add(product);
             }
         }
@@ -129,8 +132,6 @@ public class Main {
         return matches;
     }
 }
-
-
 
 
 
