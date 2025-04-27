@@ -9,8 +9,7 @@ public class Library {
             boolean running = true;
 
             while (running) {
-                System.out.println("=== Bookstore Home ===");
-                System.out.println("1. Show Available Books");
+                System.out.println(" Bookstore Home");
                 System.out.println("2. Show Checked Out Books");
                 System.out.println("3. Exit");
                 System.out.print("Choose an option: ");
@@ -68,7 +67,7 @@ public class Library {
         }
 
         private static void showCheckedOutBooks(Scanner scanner) {
-            System.out.println("--- Checked Out Books ---");
+            System.out.println(" Checked Out Books ");
             for (Book book : inventory) {
                 if (book.isCheckedOut()) {
                     System.out.printf("ID: %d | ISBN: %s | Title: %s | Checked out to: %s%n",
