@@ -3,7 +3,7 @@ import java.io.*;
 
 public class TransactionFileManager {
 
-    private static final File file = new File("src/main/resources/transactions.csv");
+    private static final File file = new File("src/main/resources/transaction.csv");
 
     // Method to read transactions (optional based on your needs)
     public static void readTransactions() {
