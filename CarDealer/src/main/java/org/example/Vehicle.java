@@ -6,19 +6,19 @@ public class Vehicle {
    private String make;
    private String model;
    private String color;
-   private int mileage;
+   private int odometer;
    private double price;
-   private String type;
+   private String vehicleType;
 
-    public Vehicle(int vin, int year, String make, String model, String color, int mileage, double price, String type) {
+    public Vehicle(int vin, int year, String make, String model, String color, int odometer, double price, String vehicleType) {
         this.vin = vin;
         this.year = year;
         this.make = make;
         this.model = model;
         this.color = color;
-        this.mileage = mileage;
+        this.odometer = odometer;
         this.price = price;
-        this.type = type;
+        this.vehicleType = vehicleType;
     }
 
     public int getVin() {
@@ -61,12 +61,12 @@ public class Vehicle {
         this.color = color;
     }
 
-    public int getMileage() {
-        return mileage;
+    public int getOdometer() {
+        return odometer;
     }
 
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
+    public void setOdometer(int odometer) {
+        this.odometer = odometer;
     }
 
     public double getPrice() {
@@ -77,12 +77,12 @@ public class Vehicle {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getVehicleType() {
+        return vehicleType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     @Override
@@ -93,9 +93,9 @@ public class Vehicle {
                 ", make='" + make + '\'' +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
-                ", mileage=" + mileage +
+                ", odometer=" + odometer +
                 ", price=" + price +
-                ", type='" + type + '\'' +
+                ", vehicleType='" + vehicleType + '\'' +
                 '}';
     }
 }
