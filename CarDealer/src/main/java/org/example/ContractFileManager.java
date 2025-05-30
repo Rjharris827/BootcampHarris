@@ -73,4 +73,8 @@ public class ContractFileManager {
             System.out.println("Error writing to contracts file: " + e.getMessage());
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b6ed75a5b93d20965ef1c5a5f6c927d2505167d8
