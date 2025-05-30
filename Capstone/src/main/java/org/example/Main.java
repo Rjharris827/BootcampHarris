@@ -1,144 +1,121 @@
 package org.example;
 
-import java.io.*;
-import java.time.LocalDateTime;
-import java.util.*;
-
 public class Main {
-    static final String FILE_NAME = "ledger.csv";
-    static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args)
+import java.util.Scanner;
 
-    public static void main(String[] args) {
-        while (true) {
-            System.out.println("\nHome Screen:");
-            System.out.println("1. Add Deposit");
-            System.out.println("2. Make Payment");
-            System.out.println("3. View Ledger");
-            System.out.println("4. Exit");
-            System.out.print("Choose an option: ");
+    public class Main {
+        static Scanner scanner = new Scanner(System.in);
 
-            String choice = scanner.nextLine();
+        public static void main(String[] args) {
+            boolean running = true;
+            while (running) {
+                System.out.println("\n--- Sandwich Shop ---");
+                System.out.println("1) New Order");
+                System.out.println("0) Exit");
+                System.out.print("Enter choice: ");
 
-            switch (choice) {
-                case "1":
-                    addDeposit();
-                    break;
-                case "2":
-                    makePayment();
-                    break;
-                case "3":
-                    viewLedger();
-                    break;
-                case "4":
-                    System.out.println("Exiting... Goodbye!");
-                    return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                try {
+                    int choice = Integer.parseInt(scanner.nextLine());
+                    switch (choice) {
+                        case 1 -> handleNewOrder();
+                        case 0 -> running = false;
+                        default -> System.out.println("Invalid choice.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: Please enter a number.");
+                }
+            }
+            System.out.println("Thanks for visiting!");
+        }
+
+        private static void handleNewOrder() {
+            Order order = new Order();
+            boolean ordering = true;
+
+            while (ordering) {
+                System.out.println("\n--- Order Menu ---");
+                System.out.println("1) Add Sandwich");
+                System.out.println("2) Add Drink");
+                System.out.println("3) Add Chips");
+                System.out.println("4) Checkout");
+                System.out.println("0) Cancel Order");
+
+                try {
+                    int option = Integer.parseInt(scanner.nextLine());
+                    switch (option) {
+                        case 1 -> {
+                            Sandwich sandwich = buildSandwich();
+                            order.addSandwich(sandwich);
+                        }
+                        case 2 -> {
+                            System.out.print("Drink size (small/medium/large): ");
+                            order.addDrink(scanner.nextLine());
+                        }
+                        case 3 -> {
+                            System.out.print("Type of chips: ");
+                            order.addChips(scanner.nextLine());
+                        }
+                        case 4 -> {
+                            order.checkout();
+                            ordering = false;
+                        }
+                        case 0 -> {
+                            System.out.println("Order cancelled.");
+                            ordering = false;
+                        }
+                        default -> System.out.println("Invalid option.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Try again.");
+                }
             }
         }
-    }
 
-    public static void addDeposit() {
-        System.out.print("Enter deposit amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
-        if (amount <= 0) {
-            System.out.println("Deposit must be a positive amount.");
-            return;
-        }
-        saveTransaction("Deposit", amount);
-        System.out.println("Deposit added.");
-    }
+        private static Sandwich buildSandwich() {
+            System.out.print("Select sandwich size (4, 8, 12): ");
+            Size size = Size.fromInt(Integer.parseInt(scanner.nextLine()));
 
-    public static void makePayment() {
-        System.out.print("Enter payment amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
-        amount = -Math.abs(amount); // Ensure it's negative
-        saveTransaction("Payment", amount);
-        System.out.println("Payment recorded.");
-    }
-
-    public static void viewLedger() {
-        List<String[]> transactions = loadTransactions();
-        if (transactions.isEmpty()) {
-            System.out.println("No transactions found.");
-            return;
-        }
-
-        System.out.println("\nView Options:");
-        System.out.println("1. All Transactions");
-        System.out.println("2. Deposits Only");
-        System.out.println("3. Payments Only");
-        System.out.print("Choose an option: ");
-        String filterChoice = scanner.nextLine();
-
-        transactions.sort(Comparator.comparing((String[] t) -> t[0]).reversed());
-
-        for (String[] t : transactions) {
-            String type = t[1];
-            if (("2".equals(filterChoice) && !"Deposit".equals(type)) ||
-                    ("3".equals(filterChoice) && !"Payment".equals(type))) {
-                continue;
+            System.out.println("Select bread type:");
+            for (BreadType b : BreadType.values()) {
+                System.out.println("- " + b);
             }
-            System.out.printf("%s | %-8s | %s%n", t[0], t[1], t[2]);
-        }
-    }
+            BreadType bread = BreadType.valueOf(scanner.nextLine().toUpperCase());
 
-    public static void saveTransaction(String type, double amount) {
-        try (FileWriter fw = new FileWriter(FILE_NAME, true)) {
-            String line = String.format("%s,%s,%.2f%n", LocalDateTime.now(), type, amount);
-            fw.write(line);
-        } catch (IOException e) {
-            System.out.println("Error saving transaction: " + e.getMessage());
-        }
-    }
+            Sandwich sandwich = new Sandwich(size, bread);
 
-    public static List<String[]> loadTransactions() {
-        List<String[]> transactions = new ArrayList<>();
-        File file = new File(FILE_NAME);
-        if (!file.exists()) return transactions;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", 3);
-                if (parts.length == 3) transactions.add(parts);
+            System.out.println("Add meats (type 'done' to finish):");
+            for (Meat m : Meat.values()) {
+                System.out.println("- " + m);
             }
-        } catch (IOException e) {
-            System.out.println("Error reading ledger: " + e.getMessage());
+            while (true) {
+                String input = scanner.nextLine().toUpperCase();
+                if (input.equals("DONE")) break;
+                try {
+                    sandwich.addMeat(Meat.valueOf(input));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid meat.");
+                }
+            }
+
+            System.out.println("Add cheese (type 'done' to finish):");
+            for (Cheese c : Cheese.values()) {
+                System.out.println("- " + c);
+            }
+            while (true) {
+                String input = scanner.nextLine().toUpperCase();
+                if (input.equals("DONE")) break;
+                try {
+                    sandwich.addCheese(Cheese.valueOf(input));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid cheese.");
+                }
+            }
+
+            System.out.print("Toasted? (yes/no): ");
+            sandwich.setToasted(scanner.nextLine().equalsIgnoreCase("yes"));
+
+            return sandwich;
         }
-        return transactions;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

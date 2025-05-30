@@ -106,6 +106,15 @@ public class Dealership {
         return result;
     }
 
+    public Vehicle getVehicleByVin(int vin) {
+        for (Vehicle v : inventory) {
+            if (v.getVin() == vin) {
+                return v;
+            }
+        }
+        return null;
+    }
+
     // Get info about the dealership
     public String getName() {
         return name;

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d28c7918-2ddc-40ad-a322-1d028ddf0ee5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Capstone2/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/BreadType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/CheeseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Chips.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Drink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/DrinkSize.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/MeatType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Sandwich.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/Size.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Capstone2/src/main/java/org/example/ToppingType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/Car/Contracts.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/.idea/csv-editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/ContractFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/ContractFileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/Dealership.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/Dealership.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/LeaseContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/LeaseContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/SalesContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/SalesContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/java/org/example/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CarDealer/src/main/resources/Inventory.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../CarDealer/src/main/resources/Inventory.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2xomQVmdN8wN8aCxkTBJXlF63X2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d28c7918-2ddc-40ad-a322-1d028ddf0ee5" name="Changes" comment="" />
+      <created>1748612785942</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748612785942</updated>
+    </task>
+    <servers />
+  </component>
+</project>

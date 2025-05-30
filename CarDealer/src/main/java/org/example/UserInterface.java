@@ -1,5 +1,6 @@
 package org.example;
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ public class UserInterface {
     private Dealership dealership;
     private DealershipFileManager fileManager;
     private Scanner scanner = new Scanner(System.in);
+    private ContractFileManager manager = new ContractFileManager();
 
     // Main method to display the menu and handle user input
     public void display() {
@@ -26,6 +28,7 @@ public class UserInterface {
                 case 7 -> processAllVehiclesRequest();
                 case 8 -> processAddVehicle();
                 case 9 -> processRemoveVehicle();
+                case 10 -> processSellOrLeaseVehicle();
                 case 99 -> {
                     System.out.println("Goodbye!");
                     return;
@@ -35,13 +38,11 @@ public class UserInterface {
         }
     }
 
-    // Initializes the DealershipFileManager and loads the dealership data from file
     private void init() {
         fileManager = new DealershipFileManager("src/main/resources/inventory.csv");
         dealership = fileManager.getDealership();
     }
 
-    // Displays the menu with available options
     private void showMenu() {
         System.out.println("""
                 \n--- Dealership Menu ---
@@ -54,11 +55,11 @@ public class UserInterface {
                 7 - List ALL vehicles
                 8 - Add a vehicle
                 9 - Remove a vehicle
+                10 - Sell or Lease a vehicle
                 99 - Quit
                 Enter your choice:""");
     }
 
-    // Helper method to display a list of vehicles
     private void displayVehicles(List<Vehicle> vehicles) {
         if (vehicles.isEmpty()) {
             System.out.println("No vehicles found.");
@@ -67,12 +68,10 @@ public class UserInterface {
         vehicles.forEach(System.out::println);
     }
 
-    // Displays all vehicles in the dealership
     private void processAllVehiclesRequest() {
         displayVehicles(dealership.getAllVehicles());
     }
 
-    // Finds vehicles based on price range
     private void processGetByPrice() {
         System.out.print("Min price: ");
         double min = Double.parseDouble(scanner.nextLine());
@@ -81,7 +80,6 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByPriceRange(min, max));
     }
 
-    // Finds vehicles based on make and model
     private void processGetByMakeModel() {
         System.out.print("Make: ");
         String make = scanner.nextLine();
@@ -90,7 +88,6 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByMakeModel(make, model));
     }
 
-    // Finds vehicles based on year range
     private void processGetByYear() {
         System.out.print("Min year: ");
         int min = Integer.parseInt(scanner.nextLine());
@@ -99,14 +96,12 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByYearRange(min, max));
     }
 
-    // Finds vehicles based on color
     private void processGetByColor() {
         System.out.print("Color: ");
         String color = scanner.nextLine();
         displayVehicles(dealership.getVehiclesByColor(color));
     }
 
-    // Finds vehicles based on mileage range
     private void processGetByMileage() {
         System.out.print("Min mileage: ");
         int min = Integer.parseInt(scanner.nextLine());
@@ -115,14 +110,12 @@ public class UserInterface {
         displayVehicles(dealership.getVehiclesByMileageRange(min, max));
     }
 
-    // Finds vehicles based on vehicle type (car, truck, SUV, van)
     private void processGetByType() {
         System.out.print("Type (car, truck, SUV, van): ");
         String type = scanner.nextLine();
         displayVehicles(dealership.getVehiclesByType(type));
     }
 
-    // Adds a new vehicle to the dealership
     private void processAddVehicle() {
         System.out.print("Enter VIN: ");
         int vin = Integer.parseInt(scanner.nextLine());
@@ -141,29 +134,68 @@ public class UserInterface {
         System.out.print("Enter Price: ");
         double price = Double.parseDouble(scanner.nextLine());
 
-        // Create the new vehicle and add it to the dealership
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, odometer, price, color);
         dealership.addVehicle(vehicle);
-
-        // Save the dealership data to the file
         fileManager.saveDealership(dealership);
-
         System.out.println("Vehicle added successfully!");
     }
 
-    // Removes a vehicle from the dealership based on VIN
     private void processRemoveVehicle() {
         System.out.print("Enter VIN of the vehicle to remove: ");
         int vin = Integer.parseInt(scanner.nextLine());
 
         dealership.removeVehicle(vin);
-
-        // Save the updated dealership data to the file
         fileManager.saveDealership(dealership);
 
         System.out.println("Vehicle removed successfully!");
     }
+
+    private void processSellOrLeaseVehicle() {
+        System.out.print("Enter VIN of vehicle to sell or lease: ");
+        int vin = Integer.parseInt(scanner.nextLine());
+
+
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+        if (vehicle == null) {
+            System.out.println("Vehicle not found.");
+            return;
+        }
+
+        System.out.print("Enter contract date (YYYYMMDD): ");
+        String date = scanner.nextLine();
+
+        System.out.print("Enter customer name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter customer email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Is this a Sale or Lease? (S/L): ");
+        String type = scanner.nextLine();
+
+        Contract contract;
+
+        if (type.equalsIgnoreCase("S")) {
+            System.out.print("Would the customer like to finance? (yes/no): ");
+            boolean finance = scanner.nextLine().equalsIgnoreCase("yes");
+            contract = new SalesContract(date, name, email, vehicle, finance);
+
+        } else if (type.equalsIgnoreCase("L")) {
+            if (vehicle.getYear() < 2022) {
+                System.out.println("Cannot lease a vehicle older than 3 years.");
+                return;
+            }
+            contract = new LeaseContract(date, name, email, vehicle);
+
+        } else {
+            System.out.println("Invalid contract type.");
+            return;
+        }
+
+        manager.saveContract(contract);
+        dealership.removeVehicle(vin);
+        fileManager.saveDealership(dealership);
+
+        System.out.println("Contract saved. Vehicle removed from inventory.");
+    }
 }
-
-
-
