@@ -1,0 +1,4 @@
+Order Summary:
+Drinks: []
+Chips: [doritos]
+Total: $1.50

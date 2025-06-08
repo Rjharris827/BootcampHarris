@@ -1,0 +1,10 @@
+Order Summary:
+FOUR sandwich on WHITE bread
+Toasted: Yes
+Meats: [SALAMI]
+Cheeses: [CHEDDAR]
+Price: $7.25
+
+Drinks: [large]
+Chips: [doritos]
+Total: $11.25

@@ -1,0 +1,10 @@
+Order Summary:
+EIGHT sandwich on WRAP bread
+Toasted: No
+Meats: [BACON]
+Cheeses: [AMERICAN]
+Price: $10.50
+
+Drinks: [lage, large]
+Chips: [cheetos]
+Total: $17.00

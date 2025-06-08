@@ -1,0 +1,10 @@
+Order Summary:
+FOUR sandwich on WHITE bread
+Toasted: Yes
+Meats: [STEAK]
+Cheeses: [CHEDDAR]
+Price: $7.25
+
+Drinks: []
+Chips: []
+Total: $7.25
